@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1</title>
+    <link rel = "stylesheet" href = "styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <audio id = "bgm" src = "sfx/bgm.wav" preload="auto" loop></audio>
+    <audio id="placement" src="sfx/placement.wav" preload="auto"></audio>
+    <audio id="movement" src="sfx/movement.wav" preload="auto"></audio>
+    <audio id="gameover" src="sfx/gameover.wav" preload="auto"></audio>
+
+    <div id="start-screen" class="popup" style="display: flex;">
+        <div class="popup-content">
+            <h2 style="margin: 0%;">Welcome to Titan's Circuit</h2>
+
+            <p style="font-size: 0.95rem; color: #cccccc; margin: 0%;">
+                Circuits are labeled from <strong>A</strong> (outermost) inwards
+                and each node is numbered starting from <strong>1</strong> in the 
+                clockwise direction from 0°.
+            </p>
+
+            <label for="num-circuits">Number of Circuits:</label>
+            <input type="number" id="num-circuits" min="1" max="10" value="3" required><br><br>
+
+            <label for="num-vertices">Vertices per Circuit:</label>
+            <input type="number" id="num-vertices" min="3" max="12" value="6" required><br><br>
+
+            <label for="game-time">Total Game Time (minutes):</label>
+            <input type="number" id="game-time" min="1" max="30" value="5" required><br><br>
+
+            <label for="move-time">Time per Move (seconds):</label>
+            <input type="number" id="move-time" min="5" max="120" value="30" required><br><br>
+
+            <button id="start-button" style="margin: 0%;">Start Game</button>
+        </div>
+    </div>
+
+    <div id = "game-screen" style="display: none;">
+        <div class="move-history">
+            <h3 style = "text-align:center;">Move History</h3>
+            <div class="history-columns">
+                <div class="history-column green-history">
+                    <h4 style="color: green;">Green</h4>
+                    <ol id="green-moves"></ol>
+                </div>
+                <div class="history-column red-history">
+                    <h4 style="color: red;">Red</h4>
+                    <ol id="red-moves"></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="board" id="board"></div>
+
+        <div class = "features">
+            <div class="player-info">
+                <h3 id = "player-info-heading">Player to move:</h3>
+                <div id="current-player" class="current-player">Green</div>
+            </div>
+            <div class="timers">
+                <div class="timer-block green">
+                    <div class = "timer" id="green-time">3:00</div>
+                    <div class = "timer" id="green-move-timer">30</div>
+                    <div class="score">Score: <span id="green-score">0</span></div>
+                </div>
+                <div class="timer-block red">
+                    <div class = "timer" id="red-time">3:00</div>
+                    <div class = "timer" id="red-move-timer">30</div>
+                    <div class="score">Score: <span id="red-score">0</span></div>
+                </div>
+            </div>
+            <div class="controls" id = "controls">
+                <button id="pause-button">⏸</button>
+                <div class="undo-redo">
+                    <button id="undo-button">↶ Undo</button>
+                    <button id="redo-button">↷ Redo</button>`
+                </div>
+                <button id="reset-button">🔄 Reset</button>
+            </div>
+            <div id="replay-screen-features" style="display: none;">
+                <div id="replay-screen-toggle">
+                    <button id="backward" class="replay-button">⟵</button>
+                    <button id="forward" class="replay-button">⟶</button>
+                </div>
+                <button id="play-again-button" onclick="location.reload()">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="resume-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <h2>Game Paused</h2>
+            <p>Current Score:</p>
+            <div class="score-info">
+                <p>Green: <span id="green-score-resume">0</span></p>
+                <p>Red: <span id="red-score-resume">0</span></p>
+            </div>
+            <button id="resume-button">Resume Game</button>
+        </div>
+    </div>
+
+    <div id="game-over-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <h2>Game Over</h2>
+            <p id="winner-text"></p>
+            <button onclick="location.reload()">Play Again</button>
+            <button id = "replay">Show Replay</button>
+        </div>
+    </div>
+
+    <script src = "game.js"></script>
+</body>
+</html>
