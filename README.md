@@ -1,4 +1,4 @@
-# 🛡️ Titan's Circuit
+#  Titan's Circuit
 
 ---
 
